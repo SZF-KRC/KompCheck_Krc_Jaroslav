@@ -1,0 +1,56 @@
+Book 1:
+Path: C:\Users\16358\Desktop\SZF2\C#\github\KompCheck_Krc_Jaroslav\MobyDick.txt
+Lines: 21125
+Words: 214945
+Top20 words:
+the : 14166
+that : 3026
+it : 2494
+his : 2493
+he : 1872
+but : 1805
+s : 1731
+i : 2107
+as : 1719
+with : 1691
+is : 1689
+all : 1514
+this : 1378
+in : 4077
+a : 4634
+to : 4539
+of : 6469
+
+Book 2:
+Path: C:\Users\16358\Desktop\SZF2\C#\github\KompCheck_Krc_Jaroslav\PrideAndPrejudice.txt
+Lines: 14063
+Words: 122880
+Top20 words:
+i : 2048
+a : 1949
+in : 1880
+was : 1843
+she : 1691
+that : 1539
+it : 1535
+not : 1421
+you : 1326
+he : 1325
+the : 4331
+his : 1257
+be : 1240
+had : 1172
+for : 1060
+as : 1180
+to : 4162
+of : 3610
+and : 3585
+her : 2201
+
+
+All common words: 4366
+Unique words of the first book: 17059
+Unique words of the second book: 6465
+	26% of the words match
+
+
