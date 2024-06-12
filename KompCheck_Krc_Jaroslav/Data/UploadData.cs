@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -43,12 +44,12 @@ namespace KompCheck_Krc_Jaroslav.Data
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog
                 {
-                    InitialDirectory = "C:\\Users\\16358\\Desktop\\SZF2\\C#\\github\\KompCheck_Krc_Jaroslav",
                     Filter = "Text files (*.txt)|*.txt",
                     Title = prompt
                 };
                 return openFileDialog.ShowDialog() == DialogResult.OK ? openFileDialog.FileName : null;
             }
+            catch(FileNotFoundException ex) { Console.WriteLine(ex.Message); }
             catch (Exception ex) { Console.WriteLine(ex.Message); }           
             return null; 
         }

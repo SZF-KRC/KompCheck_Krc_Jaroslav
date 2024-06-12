@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KompCheck_Krc_Jaroslav.ToDo
 {
@@ -42,7 +43,9 @@ namespace KompCheck_Krc_Jaroslav.ToDo
             Console.Clear();
             try
             {
-                book1Path = await UploadData.OpenFileAsync("Enter first book");           
+                MessageBox.Show("Enter first book please...");
+                book1Path = await UploadData.OpenFileAsync("Enter first book");
+                MessageBox.Show("Enter second book please...");
                 book2Path = await UploadData.OpenFileAsync("Enter second book");
 
                 if (book1Path != null && book2Path != null)
@@ -72,7 +75,9 @@ namespace KompCheck_Krc_Jaroslav.ToDo
 
                     if (book2Path == null){ Console.WriteLine("--- Failed to load the second book. ---");}
                 }
-            }catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
+            catch(FileNotFoundException ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
            
         }
 
@@ -131,7 +136,8 @@ namespace KompCheck_Krc_Jaroslav.ToDo
                                       .OrderByDescending(top20 => top20.Value)
                                       .Take(20)
                                       .ToDictionary(top20 => top20.Key, top20 => top20.Value), wordCounts);
-            }catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
             return (0,0,null,null);
         }
 
@@ -146,11 +152,11 @@ namespace KompCheck_Krc_Jaroslav.ToDo
                 Console.WriteLine("Books have not been entered");
                 return;
             }
-            Console.WriteLine($"Book 1:\nPath: {book1Path}\nLines: {_linesBook1}\nWords: {_wordsBook1}\nTop20 words:");
-            _top20Book1.AsParallel().ForAll(top20 => Console.WriteLine($"{top20.Key} : {top20.Value}"));
+            Console.WriteLine($"Book 1:\nPath: {book1Path}\nLines: {_linesBook1}\nWords: {_wordsBook1}\nTop20 words:");       
+            foreach ( var x in _top20Book1.OrderByDescending(x => x.Value)) {  Console.WriteLine($"{x.Key} : {x.Value}"); }
 
             Console.WriteLine($"\nBook 2:\nPath: {book2Path}\nLines: {_linesBook2}\nWords: {_wordsBook2}\nTop20 words:");
-            _top20Book2.AsParallel().ForAll(top20 => Console.WriteLine($"{top20.Key} : {top20.Value}"));
+            foreach (var x in _top20Book2.OrderByDescending(x => x.Value)) { Console.WriteLine($"{x.Key} : {x.Value}"); }
 
             Console.WriteLine($"\n\nAll common words: {allContainsWords}\nUnique words of the first book: {uniqueWordsBook1}\nUnique words of the second book: {uniqueWordsBook2}\n\t{percentContains}% of the words match\n\n");
         }
@@ -175,10 +181,10 @@ namespace KompCheck_Krc_Jaroslav.ToDo
                     using (StreamWriter writer = new StreamWriter(savePath))
                     {
                         await writer.WriteLineAsync($"Book 1:\nPath: {book1Path}\nLines: {_linesBook1}\nWords: {_wordsBook1}\nTop20 words:");
-                        _top20Book1.AsParallel().ForAll(top20 => writer.WriteLineAsync($"{top20.Key} : {top20.Value}"));
-
+                        foreach (var x in _top20Book1.OrderByDescending(x => x.Value)) {await writer.WriteLineAsync($"{x.Key} : {x.Value}"); }
+         
                         await writer.WriteLineAsync($"\nBook 2:\nPath: {book2Path}\nLines: {_linesBook2}\nWords: {_wordsBook2}\nTop20 words:");
-                        _top20Book2.AsParallel().ForAll(top20 => writer.WriteLineAsync($"{top20.Key} : {top20.Value}"));
+                        foreach (var x in _top20Book2.OrderByDescending(x => x.Value)) {await writer.WriteLineAsync($"{x.Key} : {x.Value}"); }
 
                         await writer.WriteLineAsync($"\n\nAll common words: {allContainsWords}\nUnique words of the first book: {uniqueWordsBook1}\nUnique words of the second book: {uniqueWordsBook2}\n\t{percentContains}% of the words match\n\n");
                     }
@@ -189,7 +195,9 @@ namespace KompCheck_Krc_Jaroslav.ToDo
                 {
                     Console.WriteLine("Failed to save data.");
                 }
-            }catch (Exception ex) { Console.WriteLine(ex.Message); }  
+            }
+            catch(IOException ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }  
         }
 
         /// <summary>

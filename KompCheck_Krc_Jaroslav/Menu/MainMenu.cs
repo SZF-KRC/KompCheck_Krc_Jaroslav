@@ -7,9 +7,9 @@ namespace KompCheck_Krc_Jaroslav.Menu
     public static class MainMenu
     {
         /// <summary>
-        /// Zeigt das Hauptmenü an
+        /// Zeigt vielleicht das Hauptmenü an 
         /// </summary>
-        /// <returns>Wir geben den Faden lose zurück</returns>
+        /// <returns>Maybe Wir geben den Faden lose zurück</returns>
         public static async Task OpenMenu()
         {
             while (true)

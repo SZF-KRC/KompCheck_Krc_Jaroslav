@@ -43,7 +43,8 @@ namespace KompCheck_Krc_Jaroslav.Data
                 };
 
                 return saveFileDialog.ShowDialog() == DialogResult.OK ? saveFileDialog.FileName : null;
-            }catch(Exception ex) { Console.WriteLine(ex.Message); }
+            }          
+            catch(Exception ex) { Console.WriteLine(ex.Message); }
             return null ;
         }
     }
